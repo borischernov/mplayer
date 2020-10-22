@@ -1,0 +1,8 @@
+Package: MPlayer
+Version: 844ce117f2bdf
+Depends: libc, zlib, libmad, libmpg123, libfaad2, libopenssl, liblzo, alsa-lib, asource
+Source: package/sound/mplayer
+Section: multimedia
+Architecture: mipsel_24kc
+Installed-Size: 5357544
+Description:  MPlayer is a movie player which runs on many systems.

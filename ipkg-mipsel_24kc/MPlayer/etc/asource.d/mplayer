@@ -1,0 +1,53 @@
+#!/bin/sh
+
+command=$1
+shift
+device=$1
+shift
+file=$1
+
+case $command in
+	name)
+		echo "Mplayer"
+	;;
+	play)
+		case "$file" in
+  			http://*|https://*)
+				# just give the URL to mplayer
+			;;
+			usb:/*)
+				echo "CP1"
+				path=`readlink -f "/tmp/sda1/${file:5}"`
+				echo $path
+				[ "${path:0:19}" == "/tmp/sda1" ] || return 0
+				find "$path" -type f -xdev -maxdepth 5 >/tmp/plist
+				opts="-playlist"
+				file="/tmp/plist"
+			;;
+			mmc:/*)
+				path=`readlink -f "/tmp/mmcblk0p1/${file:5}"`
+				[ "${path:0:14}" == "/tmp/mmcblk0p1" ] || return 0
+				find "$path" -type f >/tmp/plist
+				opts="-playlist"
+				file="/tmp/plist"
+			;;
+		    *) 
+				return 0
+			;;
+		esac
+
+		mplayer -volume 40 -slave -input file=/tmp/mplayer.fifo $opts "$file" &
+	;;
+	stop)
+		/usr/bin/killall mplayer >/dev/null 2>&1
+	;;
+	pause)
+		echo "pause" >/tmp/mplayer.fifo
+	;;
+	prev)
+		echo "pt_step -1" >/tmp/mplayer.fifo
+	;;
+	next)
+		echo "pt_step 1" >/tmp/mplayer.fifo
+	;;
+esac
