@@ -48,6 +48,7 @@ static int control(struct af_instance_s* af, int cmd, void* arg)
   case AF_CONTROL_COMMAND_LINE:
     sscanf((char*)arg,"%f", &s->step);	  
     mp_msg(MSGT_AFILTER, MSGL_V, "[rampup] Command line processed: step=%f\n", &s->step);
+    return AF_OK;
   }
   return AF_UNKNOWN;
 }
