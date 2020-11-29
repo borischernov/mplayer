@@ -55,6 +55,7 @@ extern const af_info_t af_info_karaoke;
 extern const af_info_t af_info_scaletempo;
 extern const af_info_t af_info_stats;
 extern const af_info_t af_info_bs2b;
+extern const af_info_t af_info_rampup;
 
 static const af_info_t * const filter_list[] = {
    &af_info_dummy,
@@ -69,6 +70,7 @@ static const af_info_t * const filter_list[] = {
    &af_info_pan,
    &af_info_surround,
    &af_info_sub,
+   &af_info_rampup,
 #if HAVE_SYS_MMAN_H
    &af_info_export,
 #endif
