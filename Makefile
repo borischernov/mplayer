@@ -269,6 +269,7 @@ SRCS_COMMON = asxparser.c                       \
               libaf/af_comp.c                   \
               libaf/af_delay.c                  \
               libaf/af_dummy.c                  \
+              libaf/af_rampup.c                 \
               libaf/af_equalizer.c              \
               libaf/af_extrastereo.c            \
               libaf/af_format.c                 \
