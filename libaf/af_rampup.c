@@ -44,8 +44,10 @@ static int control(struct af_instance_s* af, int cmd, void* arg)
     mp_msg(MSGT_AFILTER, MSGL_V, "[rampup] Was reinitialized: %iHz/%ich/%s\n",
 	     af->data->rate,af->data->nch, af_fmt2str_short(af->data->format));
     s->curr_level = 0.0;
-    s->step = 0.1;
     return AF_OK;
+  case AF_CONTROL_COMMAND_LINE:
+    sscanf((char*)arg,"%f", &s->step);	  
+    mp_msg(MSGT_AFILTER, MSGL_V, "[rampup] Command line processed: step=%f\n", &s->step);
   }
   return AF_UNKNOWN;
 }
